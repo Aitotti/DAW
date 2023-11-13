@@ -1,0 +1,52 @@
+import java.util.Random;
+import java.util.Scanner;
+public class T3P2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random rand = new Random();
+        boolean jugarNuevamente = true;
+
+        while (jugarNuevamente) {
+            System.out.println("Bienvenido al juego de adivinar un número entero.");
+            System.out.print("Introduce el número inicial del rango: ");
+            int inicio = sc.nextInt();
+            System.out.print("Introduce el número final del rango: ");
+            int fin = sc.nextInt();
+            System.out.print("Introduce el número de intentos permitidos: ");
+            int intentos = sc.nextInt();
+
+            int numeroAdivinar = rand.nextInt(fin - inicio + 1) + inicio;
+            int aciertos = 0;
+            int fallos = 0;
+
+            for (int i = 0; i < intentos; i++) {
+                System.out.print("Intento " + (i + 1) + ": Introduce tu suposición: ");
+                int suposicion = sc.nextInt();
+
+                if (suposicion == numeroAdivinar) {
+                    System.out.println("¡Adivinaste! El número era " + numeroAdivinar);
+                    aciertos++;
+                    break;
+                } else if (suposicion < numeroAdivinar) {
+                    System.out.println("El número a adivinar es mayor.");
+                } else {
+                    System.out.println("El número a adivinar es menor.");
+                }
+
+                if (i == intentos - 1) {
+                    System.out.println("Se te han agotado los intentos. El número era " + numeroAdivinar);
+                    fallos++;
+                }
+            }
+
+            System.out.println("Aciertos: " + aciertos);
+            System.out.println("Fallos: " + fallos);
+
+            System.out.print("¿Quieres jugar nuevamente? (Sí/No): ");
+            String respuesta = sc.next().toLowerCase();
+            jugarNuevamente = respuesta.equals("si") || respuesta.equals("sí");
+        }
+
+        System.out.println("¡Gracias por jugar!");
+    }
+}
